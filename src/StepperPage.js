@@ -52,8 +52,9 @@ export default function HorizontalNonLinearStepper() {
   };
 
   return (
-    <div style={{ display: 'flex', position: 'absolute', justifyContent: 'center', alignItems: 'center', height: '90vh', marginLeft: '50px',marginRight: '50px', paddingTop: '160px' }}>
-      <MuiNavbar />
+    // <div style={{ display: 'flex', position: 'absolute', justifyContent: 'center', alignItems: 'center', height: '90vh', marginLeft: '50px',marginRight: '50px', paddingTop: '160px' }}>
+    <div style={{ backgroundImage: `url('https://th.bing.com/th?id=OIP._XrtfyQpQW2Qigk_fQoHsgHaGq&w=263&h=237&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2')`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat', height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center',marginLeft: '30px',marginRight: '1px', }}>
+       <MuiNavbar />
     <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
       <Card sx={{ p: 2 }}>
         <Stepper nonLinear activeStep={activeStep}>

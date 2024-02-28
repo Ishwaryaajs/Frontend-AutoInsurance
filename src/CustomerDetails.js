@@ -7,6 +7,7 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
+import { RiUserFill } from 'react-icons/ri'; 
 
 const CustomerDetails = () => {
   const [customer, setCustomer] = useState(null);
@@ -58,33 +59,36 @@ const CustomerDetails = () => {
   const handleSaveClick = async () => {
     try {
       const formData = new FormData();
-      formData.append('file', file); // Append file to the FormData
-      formData.append('customer', JSON.stringify(updatedCustomer));
+      
+      // Append other customer data fields to the FormData object
+      formData.append('customerName', updatedCustomer.customerName);
+      formData.append('email', updatedCustomer.email);
+      formData.append('password', updatedCustomer.password);
+      formData.append("isAdmin",updatedCustomer.isAdmin);
+      formData.append('gender', updatedCustomer.gender);
+      formData.append('phone', updatedCustomer.phone);
+      formData.append('address', updatedCustomer.address);
+      formData.append('aadharNum', updatedCustomer.aadharNum);
+      formData.append('file', file);
   
-      // const response = await axios.put(`https://localhost:7300/api/Customers/${id}`, formData, {
-      //   headers: {
-      //     'Content-Type': 'multipart/form-data'
-      //   }
-      // }); 
-
-      const response=await fetch(`https://localhost:7300/api/Customers/${id}`,{
-        method:'PUT',
-        headers: {
-              'Content-Type': 'multipart/form-data'
-            },
-            body:JSON.stringify(formData),
-
-      })
+      const response = await fetch(`https://localhost:7300/api/Customers/${id}`, {
+        method: 'PUT',
+        body: formData,
+      });
   
       if (response.status === 204) {
         setCustomer(updatedCustomer);
         setEditMode(false);
+      } else {
+        const errorMessage = await response.text();
+        throw new Error(`Failed to update customer: ${errorMessage}`);
       }
     } catch (error) {
       console.error("Error updating customer:", error);
+      setError(error.message);
     }
   };
-  
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -98,11 +102,11 @@ const CustomerDetails = () => {
   }
 
   return (
-    <div style={{ display: 'flex',position:'absolute', justifyContent: 'center', alignItems: 'center', height: '90vh', marginLeft: '300px' ,paddingTop:'160px'}}>
+    <div style={{ backgroundImage: `url('https://th.bing.com/th?id=OIP._XrtfyQpQW2Qigk_fQoHsgHaGq&w=263&h=237&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2')`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat', height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
       <MuiNavbar />
-      <Card variant="outlined" style={{ width: '400px',position:"absolute", top:"15vh",left:"17vw" }}>
+      <Card variant="outlined" style={{ width: '400px' }}>
         <CardContent>
-         
+       
           <Typography variant="body2" color="textSecondary" gutterBottom>
             {editMode ? (
               <Grid container spacing={2}>
@@ -191,21 +195,21 @@ const CustomerDetails = () => {
               </div>
             )}
           </Typography>
-        
-         <Typography variant="body2" color="textSecondary" gutterBottom>
+          <Typography variant="body2" color="textSecondary" gutterBottom>
             {editMode ? (
               <div>
                 <Button variant="contained" onClick={handleSaveClick} style={{ marginRight: '8px' }}>Save</Button> 
-                <Button variant="contained" className='btn btn-danger' onClick={handleCancelClick}>Cancel</Button>
+                <Button variant="contained" onClick={handleCancelClick}>Cancel</Button>
               </div>
             ) : (
               <div>
-                <br/>
                 <Button variant="contained" onClick={handleEditClick}>Edit</Button>
               </div>
             )}
           </Typography>
+          
         </CardContent>
+       
       </Card>
     </div>
   );

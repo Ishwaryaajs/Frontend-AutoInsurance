@@ -11,7 +11,8 @@ import { MdEmail, MdPhone, MdLocationOn } from "react-icons/md";
 
 const LandingPage = () => {
   return (
-    <div>
+    <div style={{ backgroundImage: `url('https://th.bing.com/th?id=OIP._XrtfyQpQW2Qigk_fQoHsgHaGq&w=263&h=237&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2')`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat', height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+      
  <MuiNavbar />
       <Container maxWidth="md">
         <Typography variant="h4" align="center" style={{ marginTop: '10px' }}>

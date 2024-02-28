@@ -43,7 +43,7 @@ import { RiMotorbikeFill } from "react-icons/ri";
         console.log('Role:', reply.role);  
         sessionStorage.setItem("Id",reply.id);
         
-        navigate('/muinav');
+        navigate('/landingpage');
         
         }
         else {

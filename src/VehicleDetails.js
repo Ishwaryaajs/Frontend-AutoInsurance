@@ -133,8 +133,8 @@ const VehicleDetails = () => {
     }
   };
   return (
-    <div style={{ display: 'flex', position: 'absolute', justifyContent: 'center', alignItems: 'center', height: '90vh', marginLeft: '300px', paddingTop: '160px' }}>
-      <MuiNavbar />
+    <div style={{ backgroundImage: `url('https://th.bing.com/th?id=OIP._XrtfyQpQW2Qigk_fQoHsgHaGq&w=263&h=237&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2')`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat', height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+    <MuiNavbar />
       <div>
         {vehicle.map((vehicle, index) => (
           <Card key={index} variant="outlined" style={{ width: '400px', marginBottom: '20px' }}>

@@ -40,7 +40,7 @@
 }
 
 .form-input {
-  width: 110%;
+  width: 100%; /* Change to 100% to fit within the screen */
   padding: 8px;
   margin-bottom: 10px;
   border: 1px solid #ccc;
