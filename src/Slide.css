@@ -1,0 +1,21 @@
+.center-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 75vh; /* Adjust the height as needed */
+    width: 140%;
+    overflow: hidden;
+     /* Make sure it spans the entire width */
+}
+ 
+.image-slider {
+    width: 40%; /* Adjust the width of the image slider */
+    max-width: 90vw; /* Maximum width for responsiveness */
+    margin: 0 20px;
+    overflow: hidden; /* Add space before and after the slider */
+}
+ 
+.image-slider img {
+    width: 100%; /* Make images fill their container */
+    height: auto; /* Maintain aspect ratio */
+}

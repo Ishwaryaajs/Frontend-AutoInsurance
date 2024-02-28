@@ -1,0 +1,63 @@
+.container {
+  display: flex;
+  height: 100vh;
+  max-width: 260%;
+}
+
+.slider {
+  flex: 1; /* Make the slider take up the available space */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%; /* Set the height of the slider container to 100% of the viewport height */
+}
+
+.slider img {
+  max-width: 140%; /* Ensure the image fits the container */
+  max-height: 100%; /* Ensure the image fits the container */
+  height: 100%; /* Fill the height of the container */
+  width: auto; /* Automatically adjust the width while maintaining aspect ratio */
+  object-fit: cover; /* Ensure the image covers the entire container */
+}
+
+
+.card {
+  flex: 1; /* Make the card take up the available space */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ 
+ 
+}
+.signup-container {
+  padding: 20px;
+ 
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.form-input {
+  width: 110%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.error {
+  color: red;
+  margin-bottom: 10px;
+}
+
+.submit-btn {
+  padding: 10px 20px;
+  background-color: #db9a21;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
