@@ -135,10 +135,11 @@ const VehicleDetails = () => {
   return (
     <div style={{ backgroundImage: `url('https://th.bing.com/th?id=OIP._XrtfyQpQW2Qigk_fQoHsgHaGq&w=263&h=237&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2')`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat', height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
     <MuiNavbar />
-      <div>
+    <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' ,gap: '20px'}}>
+       
         {vehicle.map((vehicle, index) => (
-          <Card key={index} variant="outlined" style={{ width: '400px', marginBottom: '20px' }}>
-            <CardContent>
+          <Card key={index} variant="outlined" style={{ width: '600px', marginBottom: '40px' }}>
+            <CardContent >
               <Typography variant="body2" color="textSecondary" gutterBottom>
                 {editMode ? (
                   <Grid container spacing={2}>
@@ -204,12 +205,12 @@ const VehicleDetails = () => {
                   </Grid>
                 ) : (
                   <div>
-                    <div>Name: {vehicle.vehicleName}</div>
-                    <div>Register Number: {vehicle.registerNum}</div>
-                    <div>Model: {vehicle.vehicleModel}</div>
-                    <div>Register Date: {vehicle.registerDate}</div>
-                    <div>Manufacturing Year: {vehicle.mfgYear}</div>
-                    <div>Document:<a href={`https://localhost:7300/api/Vehicles/ViewFile/${vehicle.vehicleDoc}`} target="_blank" rel="noopener noreferrer">
+                    <div style={{fontSize:'25px',fontWeight:'bold'}}>Name: {vehicle.vehicleName}</div>
+                    <div style={{fontSize:'20px'}}>Register Number: {vehicle.registerNum}</div>
+                    <div style={{fontSize:'20px'}}> Model: {vehicle.vehicleModel}</div>
+                    <div style={{fontSize:'20px'}}>Register Date: {vehicle.registerDate}</div>
+                    <div style={{fontSize:'20px'}}>Manufacturing Year: {vehicle.mfgYear}</div>
+                    <div style={{fontSize:'20px'}}>Document:<a href={`https://localhost:7300/api/Vehicles/ViewFile/${vehicle.vehicleDoc}`} target="_blank" rel="noopener noreferrer">
                     View file
                   </a> </div>
                   </div>

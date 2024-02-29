@@ -47,27 +47,27 @@ const PolicyDetails = () => {
   }
 
   return (
-    <div style={{ display: 'flex', position: 'absolute', justifyContent: 'center', alignItems: 'center', height: '90vh', marginLeft: '300px', paddingTop: '20px' }}>
-      
+    <div style={{ backgroundImage: `url('https://th.bing.com/th?id=OIP._XrtfyQpQW2Qigk_fQoHsgHaGq&w=263&h=237&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2')`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat', height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+       
       <MuiNavbar />
    
       <Card variant="outlined">
-        <CardContent>
-       <h3>Policy details</h3>
+        <CardContent style={{width:"600px"}}>
+    
           
-          <Typography variant="body1" color="text.secondary">
-            Policy Number: {policy.policyNum}
+          <Typography variant="body1" color="text.secondary" style={{fontSize:"25px",fontWeight:"bold"}}>
+           {policy.policyNum}
           </Typography>
-          <Typography variant="body1" color="text.secondary">
+          <Typography variant="body1" color="text.secondary" style={{fontSize:"20px"}}>
             Start Date: {policy.startDate}
           </Typography>
-          <Typography variant="body1" color="text.secondary">
+          <Typography variant="body1" color="text.secondary" style={{fontSize:"20px"}}>
             End Date: {policy.endDate}
           </Typography>
-          <Typography variant="body1" color="text.secondary">
+          <Typography variant="body1" color="text.secondary" style={{fontSize:"20px"}}>
             Coverage Type: {policy.coverageType}
           </Typography>
-          <Typography variant="body1" color="text.secondary">
+          <Typography variant="body1" color="text.secondary" style={{fontSize:"20px"}}>
             Policy Amount: {policy.policyAmount}
           </Typography>
         </CardContent>

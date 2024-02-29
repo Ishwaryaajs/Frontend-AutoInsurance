@@ -104,8 +104,11 @@ const CustomerDetails = () => {
   return (
     <div style={{ backgroundImage: `url('https://th.bing.com/th?id=OIP._XrtfyQpQW2Qigk_fQoHsgHaGq&w=263&h=237&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2')`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat', height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
       <MuiNavbar />
-      <Card variant="outlined" style={{ width: '400px' }}>
-        <CardContent>
+      
+      <Card variant="outlined" style={{ width: '600px',backgroundImage:`url('https://www.superstock.com/cdn/1525/Comp/1525-26324284.webp')`,overflowY:'hidden', backgroundSize: 'cover', backgroundRepeat: 'no-repeat'}}>
+   
+        
+        <CardContent style={{fontSize:'40px'}}>
        
           <Typography variant="body2" color="textSecondary" gutterBottom>
             {editMode ? (
@@ -180,13 +183,13 @@ const CustomerDetails = () => {
               </Grid>
             ) : (
               <div>
-                <div>Name: {customer.customerName}</div>
-                <div>Email: {customer.email}</div>
-                <div>Password: ******</div>
-                <div>Gender: {customer.gender}</div>
-                <div>Phone: {customer.phone}</div>
-                <div>Address: {customer.address}</div>
-                <div>
+                <div style={{fontSize:'25px',fontWeight:'bold'}}>{customer.customerName}</div>
+                <div style={{fontSize:'20px'}}>Email: {customer.email}</div>
+                <div style={{fontSize:'20px'}}>Password: ******</div>
+                <div style={{fontSize:'20px'}}>Gender: {customer.gender}</div>
+                <div style={{fontSize:'20px'}}>Phone: {customer.phone}</div>
+                <div style={{fontSize:'20px'}}>Address: {customer.address}</div>
+                <div style={{fontSize:'20px'}}>
                   Aadhar Number: 
                   <a href={`https://localhost:7300/api/Customers/ViewFile/${customer.aadharNum}`} target="_blank" rel="noopener noreferrer">
                   View file
@@ -209,7 +212,7 @@ const CustomerDetails = () => {
           </Typography>
           
         </CardContent>
-       
+      
       </Card>
     </div>
   );

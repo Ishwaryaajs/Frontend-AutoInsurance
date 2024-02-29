@@ -15,12 +15,10 @@ const LandingPage = () => {
       
  <MuiNavbar />
       <Container maxWidth="md">
-        <Typography variant="h4" align="center" style={{ marginTop: '10px' }}>
+        <Typography variant="h4" align="center" style={{ marginTop: '80px' }}>
          <marquee> Welcome to Claim Pro <RiMotorbikeFill /></marquee>
         </Typography>
-        
-        {/* About Section */}
-        <section id="about" style={{ marginTop: '50px' }}>
+        <section id="about" style={{ marginTop: '30px' }}>
           <Typography variant="h5" align="center" gutterBottom>
             About Us
           </Typography>
@@ -33,7 +31,7 @@ const LandingPage = () => {
         </section>
 
         {/* Image Section */}
-        <section id="images" style={{ marginTop: '50px' }}>
+        <section id="images" style={{ marginTop: '30px' }}>
           <Typography variant="h5" align="center" gutterBottom>
            
           </Typography>
@@ -63,7 +61,7 @@ const LandingPage = () => {
         </section>
 
         {/* Contact Section */}
-        <section id="contact" style={{ marginTop: '50px' }}>
+        <section id="contact" style={{ marginTop: '30px' }}>
           <Typography variant="h5" align="center" gutterBottom>
             Contact Us
           </Typography>
