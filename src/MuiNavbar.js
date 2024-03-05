@@ -139,7 +139,7 @@ export default function MuiNavbar() {
           {[
             { text: 'Home', icon: <HomeIcon />, path: '/landingpage' },
             { text: 'View Profile', icon: <AccountCircleIcon />, path: '/customerdetails' },
-            { text: 'Add', icon: <AddIcon />, path: '/stepper' },
+            { text: 'Add', icon: <AddIcon />, path: '/vehicle' },
             { text: 'Vehicle Details', icon: <DriveEtaIcon />, path: '/vehicledetails' },
             { text: 'Sign out', icon: <ExitToAppIcon />, path: '/login' },
           ].map((item, index) => (

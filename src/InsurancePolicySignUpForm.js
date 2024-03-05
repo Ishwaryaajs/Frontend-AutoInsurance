@@ -20,13 +20,12 @@ const InsurancePolicySignUpForm = () => {
   const currentYear = new Date().getFullYear();
 const nextYear = currentYear + 1;
 
-  const calculateYears = (startDate, endDate) => {
-    const start = new Date(startDate);
-    const end = new Date(endDate);
-    const years = end.getFullYear() - start.getFullYear();
-   
-    return `${years} years`;
-  };
+const calculateMonths = (startDate, endDate) => {
+  const start = new Date(startDate);
+  const end = new Date(endDate);
+  const months = (end.getFullYear() - start.getFullYear()) * 12 + (end.getMonth() - start.getMonth());
+  return `${months} months`;
+};
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -126,7 +125,7 @@ const nextYear = currentYear + 1;
             label="Duration"
             type="text"
             fullWidth
-            value={calculateYears(formData.startDate, formData.endDate)}
+            value={calculateMonths(formData.startDate, formData.endDate)}
             onChange={handleChange}
             InputLabelProps={{
               shrink: true,

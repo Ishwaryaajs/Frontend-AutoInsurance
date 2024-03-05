@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
@@ -15,6 +15,7 @@ const steps = ['Vehicle Details', 'Policy Details'];
 export default function HorizontalNonLinearStepper() {
   const [activeStep, setActiveStep] = React.useState(0);
   const [completed, setCompleted] = React.useState({});
+  const [vehicleId, setVehicleId] = React.useState(null); // State to store vehicleId
 
   const totalSteps = () => {
     return steps.length;
@@ -51,25 +52,28 @@ export default function HorizontalNonLinearStepper() {
     return completedSteps() === totalSteps();
   };
 
+  const handleVehicleFormSubmit = (vehicleId) => {
+    setVehicleId(vehicleId);
+    handleNext(); // Move to the next step (policy details) after vehicle form submission
+  };
+
   return (
-    // <div style={{ display: 'flex', position: 'absolute', justifyContent: 'center', alignItems: 'center', height: '90vh', marginLeft: '50px',marginRight: '50px', paddingTop: '160px' }}>
     <div style={{ backgroundImage: `url('https://th.bing.com/th?id=OIP._XrtfyQpQW2Qigk_fQoHsgHaGq&w=263&h=237&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2')`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat', height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center',marginLeft: '30px',marginRight: '1px', }}>
        <MuiNavbar />
-    <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-      <Card sx={{ p: 2 }}>
-        <Stepper nonLinear activeStep={activeStep}>
-          {steps.map((label, index) => (
-            <Step key={label} completed={completed[index]}>
-              <StepButton color="inherit" onClick={handleStep(index)}>
-                {label}
-              </StepButton>
-            </Step>
-          ))}
-        </Stepper>
-        <div>
-          {activeStep === 0 && <VehicleSignUpForm />} {/* Render VehicleSignUpForm component on the first step */}
-          {activeStep === 1 && <InsurancePolicySignUpForm/>} {/* Render Policy Details component on the second step */}
-         
+      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+        <Card sx={{ p: 2 }}>
+          <Stepper nonLinear activeStep={activeStep}>
+            {steps.map((label, index) => (
+              <Step key={label} completed={completed[index]}>
+                <StepButton color="inherit" onClick={handleStep(index)}>
+                  {label}
+                </StepButton>
+              </Step>
+            ))}
+          </Stepper>
+          <div>
+            {activeStep === 0 && <VehicleSignUpForm onSubmit={handleVehicleFormSubmit} />} {/* Pass onSubmit prop to handle form submission */}
+            {activeStep === 1 && <InsurancePolicySignUpForm vehicleId={vehicleId} />} {/* Pass vehicleId to policy form */}
             {activeStep !== steps.length &&
               (completed[activeStep] ? (
                 <Typography variant="caption" sx={{ display: 'inline-block' }}>
@@ -80,9 +84,9 @@ export default function HorizontalNonLinearStepper() {
                   {completedSteps() === totalSteps() - 1 ? 1 : 1}
                 </Button>
               ))}
-        
-        </div>
-      </Card>
-    </Box></div>
+          </div>
+        </Card>
+      </Box>
+    </div>
   );
 }
