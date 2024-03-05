@@ -3,11 +3,13 @@ import MuiNavbar from './MuiNavbar';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
+import { useNavigate } from 'react-router-dom';
 
 const PolicyDetails = () => {
   const [policy, setPolicy] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const navigate=useNavigate();
 
   const vid = localStorage.getItem("vehicleId");
 
@@ -70,7 +72,9 @@ const PolicyDetails = () => {
           <Typography variant="body1" color="text.secondary" style={{fontSize:"20px"}}>
             Policy Amount: {policy.policyAmount}
           </Typography>
+          <button className='btn btn-primary' onClick={()=>navigate('/claimform')}>Add Claim</button>
         </CardContent>
+   
       </Card>
     </div>
   );

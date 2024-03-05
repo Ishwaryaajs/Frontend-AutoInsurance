@@ -1,7 +1,7 @@
+
 import React, { useState } from 'react';
 import axios from 'axios';
-import { TextField, Button, Grid, Select, MenuItem, InputLabel } from '@mui/material';
-
+import { TextField, Button, Grid, MenuItem, Select, InputLabel } from '@mui/material';
 import MuiNavbar from './MuiNavbar';
 import { useNavigate } from 'react-router-dom';
 
@@ -17,17 +17,46 @@ const InsurancePolicySignUpForm = () => {
   });
   const [error, setError] = useState('');
   const navigate=useNavigate();
+  const currentYear = new Date().getFullYear();
+const nextYear = currentYear + 1;
 
-  const handleChange = (e) => {
-    
-    const { name, value } = e.target;
+  const calculateYears = (startDate, endDate) => {
+    const start = new Date(startDate);
+    const end = new Date(endDate);
+    const years = end.getFullYear() - start.getFullYear();
    
-    setFormData(prevState => ({
-      ...prevState,
-      [name]: value
-    }));
+    return `${years} years`;
   };
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+  
+    let errorMessage = '';
+  
+    if (name === 'policyNum' && !/^[a-zA-Z0-9]{0,6}$/.test(value)) {
+      errorMessage = 'Policy number must be alphanumeric and exactly 6 characters long.';
+    }
+  
+    if (name === 'policyAmount') {
+      const amount = parseFloat(value);
+  
+      if (isNaN(amount) || amount < 500 || amount > 5000) {
+        errorMessage = 'Policy amount must be a number between 500 and 5000.';
+      }
+    }
+  
+    // Set the error message
+    setError(errorMessage);
+  
+    // Update the form data
+    setFormData((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+  
+  
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -41,8 +70,6 @@ const InsurancePolicySignUpForm = () => {
   };
 
   return (
-    <div style={{ backgroundImage: `url('https://th.bing.com/th?id=OIP._XrtfyQpQW2Qigk_fQoHsgHaGq&w=263&h=237&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2')`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat', height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center',paddingTop:'10px' }}>
-      
     <Grid container justifyContent="center">
       <Grid item xs={10} sm={8} md={6}>
         <MuiNavbar />
@@ -63,39 +90,50 @@ const InsurancePolicySignUpForm = () => {
             margin="dense"
             name="startDate"
             label="Start Date"
-            type="datetime-local"
+            type="date"
             fullWidth
             value={formData.startDate}
             onChange={handleChange}
             InputLabelProps={{
               shrink: true,
             }}
+            inputProps={{
+              min: new Date().toISOString().split('T')[0], // Set min to current date
+            }}
             required
           />
+          
           <TextField
             margin="dense"
             name="endDate"
             label="End Date"
-            type="datetime-local"
+            type="date"
             fullWidth
             value={formData.endDate}
             onChange={handleChange}
             InputLabelProps={{
               shrink: true,
             }}
+            inputProps={{
+              min: `${nextYear}-01-01`, // Set min to the next year
+            }}
             required
           />
-          {/* <TextField
+         
+          <TextField
             margin="dense"
-            name="coverageType"
-            label="Coverage Type"
+            name="noofyears"
+            label="Duration"
             type="text"
             fullWidth
-            value={formData.coverageType}
+            value={calculateYears(formData.startDate, formData.endDate)}
             onChange={handleChange}
-            required
-          /> */}
-          <InputLabel id="coverage-type-label">Coverage Type</InputLabel>
+            InputLabelProps={{
+              shrink: true,
+            }}
+           readonly
+          />
+           <InputLabel id="coverage-type-label">Coverage Type</InputLabel>
           <Select
             labelId="coverage-type-label"
             id="coverage-type"
@@ -105,17 +143,18 @@ const InsurancePolicySignUpForm = () => {
             fullWidth
             required
           >
-            <MenuItem value="Comprehensive">Comprehensive</MenuItem>
-            <MenuItem value="Third Party Liability">Third Party Liability</MenuItem>
+            <MenuItem value="Liability">Liability</MenuItem>
             <MenuItem value="Collision">Collision</MenuItem>
-            <MenuItem value="Personal Injury Protection">Personal Injury Protection(PIP)</MenuItem>
+            <MenuItem value="Comprehensive">Comprehensive</MenuItem>
+            <MenuItem value="Personal Injury Protection">Personal Injury Protection</MenuItem>
+            <MenuItem value="Uninsured/Underinsured Motorist">Uninsured/Underinsured Motorist</MenuItem>
             {/* Add more coverage types as needed */}
           </Select>
           <TextField
             margin="dense"
             name="policyAmount"
             label="Policy Amount"
-            type="number"
+            type="text"
             fullWidth
             value={formData.policyAmount}
             onChange={handleChange}
@@ -127,7 +166,6 @@ const InsurancePolicySignUpForm = () => {
         </form>
       </Grid>
     </Grid>
-    </div>
   );
 };
 
