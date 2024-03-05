@@ -4,6 +4,7 @@ import LoginForm from './LoginForm';
 import SignUpForm from './SignUpForm';
 import Slide from './Slide';
 import ImageSlider from './ImageSlider';
+import ClaimDetails from './ClaimDetails';
 import ImagesComponent from './ImagesComponent';
 import { BrowserRouter,Routes,Route } from 'react-router-dom';
 import HomePage from './HomePage';
@@ -31,6 +32,7 @@ function App() {
     <Route path='/vehicledetails' element={<VehicleDetails/>}/>
     <Route path='/policydetails' element={<PolicyDetails/>}/>
     <Route path='/claimform' element={<ClaimForm/>}/>
+    <Route path='/claimdetails' element={<ClaimDetails/>}/>
     <Route path='/policy' element={<InsurancePolicySignUpForm/>}/>
     <Route path='/stepper' element={<StepperPage/>}/>
     <Route path='/landingpage' element={<LandingPage/>}/>

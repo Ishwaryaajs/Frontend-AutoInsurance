@@ -60,7 +60,7 @@ const nextYear = currentYear + 1;
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`https://localhost:7300/api/InsurancePolicies/ByVehicleId?vehicleId=${localStorage.getItem("vehicleId")}`, formData);
+      const response = await axios.post(`https://localhost:7300/api/InsurancePolicies/ByVehicleId/${localStorage.getItem("vehicleId")} `, formData);
       console.log(response.data);
       navigate('/landingpage');
     } catch (error) {
