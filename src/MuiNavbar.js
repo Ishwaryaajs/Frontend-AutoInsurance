@@ -90,11 +90,11 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   }),
 );
 
-
-
 export default function MuiNavbar() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const role = sessionStorage.getItem("Role");
+  console.log(role);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -103,49 +103,67 @@ export default function MuiNavbar() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-  
 
-  return (
-    <Box sx={{ display: 'flex' }}>
-      <CssBaseline />
-      <AppBar position="fixed" open={open}>
-        <Toolbar>
-          
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            sx={{
-              marginRight: 5,
-              ...(open && { display: 'none' }),
-            }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            ClaimPro
-          </Typography>
-        </Toolbar>
-      </AppBar>
-      <Drawer variant="permanent" open={open}>
-        <DrawerHeader>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-          </IconButton>
-        </DrawerHeader>
-        <Divider />
-        <List>
-          {[
-            { text: 'Home', icon: <HomeIcon />, path: '/landingpage' },
-            { text: 'View Profile', icon: <AccountCircleIcon />, path: '/customerdetails' },
-            { text: 'Add', icon: <AddIcon />, path: '/vehicle' },
-            { text: 'Vehicle Details', icon: <DriveEtaIcon />, path: '/vehicledetails' },
-            { text: 'Sign out', icon: <ExitToAppIcon />, path: '/login' },
-          ].map((item, index) => (
-            <ListItem key={item.text} disablePadding sx={{ display: 'block' }}>
-              {item.path ? (
-                <Link to={item.path} style={{ textDecoration: 'none' }}>
+  if (role === 'Admin') {
+    return (
+      <Box sx={{ display: 'flex' }}>
+        <CssBaseline />
+        <AppBar position="fixed" open={open}>
+          <Toolbar>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawerOpen}
+              edge="start"
+              sx={{
+                marginRight: 5,
+                ...(open && { display: 'none' }),
+              }}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography variant="h6" noWrap component="div">
+              ClaimPro
+            </Typography>
+          </Toolbar>
+        </AppBar>
+        <Drawer variant="permanent" open={open}>
+          <DrawerHeader>
+            <IconButton onClick={handleDrawerClose}>
+              {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+            </IconButton>
+          </DrawerHeader>
+          <Divider />
+          <List>
+            {[
+              { text: 'Home', icon: <HomeIcon />, path: '/landingpage' },
+              { text: 'View Profile', icon: <AccountCircleIcon />, path: '/customers' },
+            
+              { text: 'Sign out', icon: <ExitToAppIcon />, path: '/login' },
+            ].map((item, index) => (
+              <ListItem key={item.text} disablePadding sx={{ display: 'block' }}>
+                {item.path ? (
+                  <Link to={item.path} style={{ textDecoration: 'none' }}>
+                    <ListItemButton
+                      sx={{
+                        minHeight: 48,
+                        justifyContent: open ? 'initial' : 'center',
+                        px: 2.5,
+                      }}
+                    >
+                      <ListItemIcon
+                        sx={{
+                          minWidth: 0,
+                          mr: open ? 3 : 'auto',
+                          justifyContent: 'center',
+                        }}
+                      >
+                        {item.icon}
+                      </ListItemIcon>
+                      <ListItemText primary={item.text} sx={{ opacity: open ? 1 : 0 }} />
+                    </ListItemButton>
+                  </Link>
+                ) : (
                   <ListItemButton
                     sx={{
                       minHeight: 48,
@@ -164,34 +182,105 @@ export default function MuiNavbar() {
                     </ListItemIcon>
                     <ListItemText primary={item.text} sx={{ opacity: open ? 1 : 0 }} />
                   </ListItemButton>
-                </Link>
-              ) : (
-                <ListItemButton
-                  sx={{
-                    minHeight: 48,
-                    justifyContent: open ? 'initial' : 'center',
-                    px: 2.5,
-                  }}
-                >
-                  <ListItemIcon
+                )}
+              </ListItem>
+            ))}
+          </List>
+        </Drawer>
+        <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+          <DrawerHeader />
+        </Box>
+      </Box>
+    );
+  } else {
+    // Default navbar for customer role
+    return (
+      <Box sx={{ display: 'flex' }}>
+        <CssBaseline />
+        <AppBar position="fixed" open={open}>
+          <Toolbar>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawerOpen}
+              edge="start"
+              sx={{
+                marginRight: 5,
+                ...(open && { display: 'none' }),
+              }}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography variant="h6" noWrap component="div">
+              ClaimPro
+            </Typography>
+          </Toolbar>
+        </AppBar>
+        <Drawer variant="permanent" open={open}>
+          <DrawerHeader>
+            <IconButton onClick={handleDrawerClose}>
+              {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+            </IconButton>
+          </DrawerHeader>
+          <Divider />
+          <List>
+            {[
+              { text: 'Home', icon: <HomeIcon />, path: '/landingpage' },
+              { text: 'View Profile', icon: <AccountCircleIcon />, path: '/customerdetails' },
+              { text: 'Add', icon: <AddIcon />, path: '/vehicle' },
+              { text: 'Vehicle Details', icon: <DriveEtaIcon />, path: '/vehicledetails' },
+              { text: 'Sign out', icon: <ExitToAppIcon />, path: '/login' },
+            ].map((item, index) => (
+              <ListItem key={item.text} disablePadding sx={{ display: 'block' }}>
+                {item.path ? (
+                  <Link to={item.path} style={{ textDecoration: 'none' }}>
+                    <ListItemButton
+                      sx={{
+                        minHeight: 48,
+                        justifyContent: open ? 'initial' : 'center',
+                        px: 2.5,
+                      }}
+                    >
+                      <ListItemIcon
+                        sx={{
+                          minWidth: 0,
+                          mr: open ? 3 : 'auto',
+                          justifyContent: 'center',
+                        }}
+                      >
+                        {item.icon}
+                      </ListItemIcon>
+                      <ListItemText primary={item.text} sx={{ opacity: open ? 1 : 0 }} />
+                    </ListItemButton>
+                  </Link>
+                ) : (
+                  <ListItemButton
                     sx={{
-                      minWidth: 0,
-                      mr: open ? 3 : 'auto',
-                      justifyContent: 'center',
+                      minHeight: 48,
+                      justifyContent: open ? 'initial' : 'center',
+                      px: 2.5,
                     }}
                   >
-                    {item.icon}
-                  </ListItemIcon>
-                  <ListItemText primary={item.text} sx={{ opacity: open ? 1 : 0 }} />
-                </ListItemButton>
-              )}
-            </ListItem>
-          ))}
-        </List>
-      </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        <DrawerHeader />
+                    <ListItemIcon
+                      sx={{
+                        minWidth: 0,
+                        mr: open ? 3 : 'auto',
+                        justifyContent: 'center',
+                      }}
+                    >
+                      {item.icon}
+                    </ListItemIcon>
+                    <ListItemText primary={item.text} sx={{ opacity: open ? 1 : 0 }} />
+                  </ListItemButton>
+                )}
+              </ListItem>
+            ))}
+          </List>
+        </Drawer>
+        <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+          <DrawerHeader />
+        </Box>
       </Box>
-    </Box>
-  );
+    );
+  }
 }
