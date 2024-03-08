@@ -139,7 +139,10 @@ export default function MuiNavbar() {
               { text: 'Home', icon: <HomeIcon />, path: '/landingpage' },
               { text: 'View Profile', icon: <AccountCircleIcon />, path: '/customers' },
             
+<<<<<<< HEAD
               { text: 'Vehicle Details', icon: <DriveEtaIcon />, path: '/vehicledetails' },
+=======
+>>>>>>> cbe8a23a7eb041e353469ce66d6c6c37f73213b2
               { text: 'Sign out', icon: <ExitToAppIcon />, path: '/login' },
             ].map((item, index) => (
               <ListItem key={item.text} disablePadding sx={{ display: 'block' }}>

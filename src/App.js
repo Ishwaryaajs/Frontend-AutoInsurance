@@ -28,6 +28,7 @@ function App() {
     <Route path='/signup' element={<SignUpForm/>}/>
     <Route path='/muinav' element={<MuiNavbar/>}/>
     <Route path='/customerdetails' element={<CustomerDetails/>}/>
+    <Route path='/customers' element={<CustomerList/>}/>
     <Route path='/updatecustomer' element={<UpdateCustomer/>}/>
     <Route path='/vehicle' element={<VehicleSignUpForm/>}/>
     <Route path='/vehicledetails' element={<VehicleDetails/>}/>

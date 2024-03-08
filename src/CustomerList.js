@@ -23,13 +23,19 @@ function CustomerList() {
 
   return (
     <div>
+<<<<<<< HEAD
       <MuiNavbar />
       <h1 className='text-center'>Customer List</h1>
+=======
+        <MuiNavbar/>
+      <h1>Customer List</h1>
+>>>>>>> cbe8a23a7eb041e353469ce66d6c6c37f73213b2
       <div className="customer-container" style={{position:"absolute",marginLeft:"6vw"}}>
         {customers.map(customer => (
           <div className="customer-card" key={customer.customerId}>
             <h2>{customer.customerName}</h2>
             <p><strong>Email:</strong> {customer.email}</p>
+<<<<<<< HEAD
             <p><strong>Gender:</strong> {customer.gender}</p>
             <p><strong>Phone:</strong> {customer.phone}</p>
             <p><strong>Address:</strong> {customer.address}</p>
@@ -39,11 +45,20 @@ function CustomerList() {
                 View file
               </a>
             </p>
+          
+            <p><strong>Gender:</strong> {customer.gender}</p>
+            <p><strong>Phone:</strong> {customer.phone}</p>
+            <p><strong>Address:</strong> {customer.address}</p>
+            <p><strong>Aadhar Number:</strong>  <a href={`https://localhost:7300/api/Customers/ViewFile/${customer.aadharNum}`} target="_blank" rel="noopener noreferrer">
+                  View file
+                  </a></p>
+>>>>>>> cbe8a23a7eb041e353469ce66d6c6c37f73213b2
           </div>
         ))}
       </div>
 
       <style jsx>{`
+<<<<<<< HEAD
         .customer-container {
           display: flex;
           flex-wrap: wrap;
@@ -67,6 +82,28 @@ function CustomerList() {
             flex: 0 0 calc(45% - 20px); /* Adjust for smaller screens */
           }
         }
+=======
+         .customer-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 20px; /* Adjust the gap between cards */
+          }
+  
+          .customer-card {
+            flex: 0 0 calc(33.33% - 20px); /* Adjust the width of each card and consider the gap */
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box; /* Include padding in the width calculation */
+          }
+          @media (max-width: 768px) {
+            .customer-card {
+              flex: 0 0 calc(50% - 20px); /* Adjust for smaller screens */
+            }
+          }
+>>>>>>> cbe8a23a7eb041e353469ce66d6c6c37f73213b2
       `}</style>
     </div>
   );

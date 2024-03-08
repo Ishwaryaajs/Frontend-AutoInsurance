@@ -40,6 +40,7 @@ import { RiMotorbikeFill } from "react-icons/ri";
           const reply=await response.json();
           console.log(reply.id);
           sessionStorage.setItem("Email",email);
+          sessionStorage.setItem("Role",reply.role);
           console.log('Token:', reply.token);
         console.log('Role:', reply.role);  
         sessionStorage.setItem("Id",reply.id);
