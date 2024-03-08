@@ -69,7 +69,7 @@ const calculateMonths = (startDate, endDate) => {
   };
 
   return (
-    <Grid container justifyContent="center">
+    <Grid container justifyContent="center" style={{ height: '100vh',backgroundImage: `url('https://th.bing.com/th?id=OIP._XrtfyQpQW2Qigk_fQoHsgHaGq&w=263&h=237&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2')`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat' }}>
       <Grid item xs={10} sm={8} md={6}>
         <MuiNavbar />
         

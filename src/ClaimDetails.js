@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import MuiNavbar from './MuiNavbar';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
 
 function ClaimDetails(props) {
   const [claim, setClaim] = useState(null); // Initialize claim as null
@@ -14,7 +17,6 @@ function ClaimDetails(props) {
         }
         const data = await response.json();
         setClaim(data[0]);
-        console.log(data[0]);
         setLoading(false);
       } catch (error) {
         console.error('Error fetching claim:', error);
@@ -34,17 +36,22 @@ function ClaimDetails(props) {
   }
 
   return (
-    <div>
-      <h2>Claim Details</h2>
-      <p>Claim Number: {claim.claimNumber}</p>
-      <p>Claim Amount: {claim.claimAmount}</p>
-      <p>Submission Date: {claim.submissionDate}</p>
-      <p>Accident Date: {claim.accidentDate}</p>
-      <p>Accident Location: {claim.accidentLocation}</p>
-      <p>Description: {claim.description}</p>
-      <p>Report Number: {claim.reportNum}</p>
-      <p>Claim Status: {claim.claimStatus ? 'Active' : 'Inactive'}</p>
-    </div>
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', backgroundImage: `url('https://th.bing.com/th?id=OIP._XrtfyQpQW2Qigk_fQoHsgHaGq&w=263&h=237&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2')`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundColor: 'rgba(255, 255, 255, 0.8)' }}>
+    <MuiNavbar />
+    <Card variant="outlined" style={{ width: '600px', overflowY: 'hidden', backgroundSize: 'cover', backgroundRepeat: 'no-repeat', textAlign: 'center' }}>
+      <CardContent style={{ fontSize: '20px' }}>
+        <h2>Claim Details</h2>
+        <p>Claim Number: {claim.claimNumber}</p>
+        <p>Claim Amount: {claim.claimAmount}</p>
+        <p>Submission Date: {claim.submissionDate}</p>
+        <p>Accident Date: {claim.accidentDate}</p>
+        <p>Accident Location: {claim.accidentLocation}</p>
+        <p>Description: {claim.description}</p>
+        <p>Report Number: {claim.reportNum}</p>
+        <p>Claim Status: {claim.claimStatus ? 'Active' : 'Inactive'}</p>
+      </CardContent>
+    </Card>
+  </div>
   );
 }
 

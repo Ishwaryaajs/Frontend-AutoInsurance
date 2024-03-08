@@ -25,10 +25,6 @@ function CustomerList() {
     <div>
 
       <MuiNavbar />
-      <h1 className='text-center'>Customer List</h1>
-
-        <MuiNavbar/>
-     
 
       <div className="customer-container" style={{position:"absolute",marginLeft:"6vw"}}>
         {customers.map(customer => (

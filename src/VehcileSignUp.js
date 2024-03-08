@@ -93,7 +93,7 @@ const VehicleSignUpForm = () => {
   };
 
   return (
-    <Grid container justifyContent="center" alignItems="center" style={{ height: '100vh' }}>
+    <Grid container justifyContent="center" alignItems="center" style={{ height: '100vh',backgroundImage: `url('https://th.bing.com/th?id=OIP._XrtfyQpQW2Qigk_fQoHsgHaGq&w=263&h=237&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2')`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat' }}>
    
   <MuiNavbar/>
     {error && <div className="error">{error}</div>}

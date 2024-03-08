@@ -105,7 +105,7 @@ const CustomerDetails = () => {
     <div style={{ backgroundImage: `url('https://th.bing.com/th?id=OIP._XrtfyQpQW2Qigk_fQoHsgHaGq&w=263&h=237&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2')`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat', height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
       <MuiNavbar />
       
-      <Card variant="outlined" style={{ width: '600px',backgroundImage:`url('https://www.superstock.com/cdn/1525/Comp/1525-26324284.webp')`,overflowY:'hidden', backgroundSize: 'cover', backgroundRepeat: 'no-repeat'}}>
+      <Card variant="outlined" style={{ width: '600px',overflowY:'hidden', backgroundSize: 'cover', backgroundRepeat: 'no-repeat'}}>
    
         
         <CardContent style={{fontSize:'40px'}}>
