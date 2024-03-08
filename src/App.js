@@ -19,6 +19,7 @@ import UpdateCustomer from './UpdateCustomer';
 import VehicleDetails from './VehicleDetails';
 import PolicyDetails from './PolicyDetails';
 import ClaimForm from './ClaimForm';
+import CustomerList from './CustomerList';
 
 function App() {
   return <BrowserRouter>
@@ -35,6 +36,7 @@ function App() {
     <Route path='/claimdetails' element={<ClaimDetails/>}/>
     <Route path='/policy' element={<InsurancePolicySignUpForm/>}/>
     <Route path='/stepper' element={<StepperPage/>}/>
+    <Route path='/customers' element={<CustomerList/>}/>
     <Route path='/landingpage' element={<LandingPage/>}/>
   <Route path='/' element={<Navbar/>}/>
   <Route index element={<HomePage/>}/>

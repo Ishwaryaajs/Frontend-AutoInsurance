@@ -22,7 +22,7 @@ const VehicleDetails = () => {
   useEffect(() => {
     const fetchVehicleData = async () => {
       try {
-        const response = await fetch(`https://localhost:7300/api/Vehicles/ByCustomerId/${id}`);
+        const response = await fetch(`https://localhost:7300/api/Vehicles/ByCustomerIdDetail/${id}`);
         if (response.ok) {
           const data = await response.json();
 

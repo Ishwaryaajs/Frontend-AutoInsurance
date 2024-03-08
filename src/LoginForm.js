@@ -43,6 +43,7 @@ import { RiMotorbikeFill } from "react-icons/ri";
           console.log('Token:', reply.token);
         console.log('Role:', reply.role);  
         sessionStorage.setItem("Id",reply.id);
+        sessionStorage.setItem("Role",reply.role);
         
         navigate('/landingpage');
         
