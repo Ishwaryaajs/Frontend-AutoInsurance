@@ -25,9 +25,9 @@ const VehicleDetails = () => {
         const response = await fetch(`https://localhost:7300/api/Vehicles/ByCustomerIdDetail/${id}`);
         if (response.ok) {
           const data = await response.json();
-
-          setVehicle(data); 
-          console.log(data);
+          setVehicle(data);
+  
+         
         } else {
           setError('Failed to fetch vehicle data');
         }
@@ -36,34 +36,12 @@ const VehicleDetails = () => {
       }
       setLoading(false);
     };
-
+  
     fetchVehicleData();
-  }, [id]); 
-
-
-  useEffect(() => {
-    const checkPolicy = async () => {
-      try {
-        // Create an array of promises for each fetch request
-        const promises = vehicle.map(async (vehicle) => {
-          const response = await fetch(`https://localhost:7300/api/InsurancePolicies/HasPolicy/${vehicle.vehicleId}`);
-          if (response.ok) {
-            const data = await response.json();
-            setHasPolicy(data);
-          } else {
-            setError('Failed to fetch policy data');
-          }
-        });
+  }, [id]);
   
-       
-        await Promise.all(promises);
-      } catch (error) {
-        setError('Failed to fetch policy data');
-      }
-    };
+
   
-    checkPolicy();
-  }, [vehicle]); 
   
   
 
@@ -122,16 +100,27 @@ const VehicleDetails = () => {
   if (!vehicle) {
     return <div>Vehicle not found</div>;
   }
-
-  const handleAddPolicyClick = (vehicleId) => {
-    if (!hasPolicy) {
-      localStorage.setItem("vehicleId", vehicleId);
-      navigate(`/policy`);
-    } else {
-      localStorage.setItem("vehicleId", vehicleId);
-      navigate(`/policydetails`);
+  const handleAddPolicyClick = async (vehicleId) => {
+    try {
+      const policyResponse = await fetch(`https://localhost:7300/api/InsurancePolicies/HasPolicy/${vehicleId}`);
+      if (policyResponse.ok) {
+        const hasPolicyData = await policyResponse.json();
+        if (!hasPolicyData) {
+          localStorage.setItem("vehicleId", vehicleId);
+          navigate(`/policy`);
+        } else {
+          localStorage.setItem("vehicleId", vehicleId);
+          navigate(`/policydetails`);
+        }
+      } else {
+        setError('Failed to fetch policy data');
+      }
+    } catch (error) {
+      console.error('Error checking policy:', error);
+      setError('Error checking policy');
     }
   };
+  
   return (
     <div style={{ backgroundImage: `url('https://th.bing.com/th?id=OIP._XrtfyQpQW2Qigk_fQoHsgHaGq&w=263&h=237&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2')`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat', height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
     <MuiNavbar />
@@ -205,7 +194,7 @@ const VehicleDetails = () => {
                   </Grid>
                 ) : (
                   <div>
-                    <div style={{fontSize:'25px',fontWeight:'bold'}}>Name: {vehicle.vehicleName}</div>
+                    <div style={{fontSize:'25px',fontWeight:'bold'}}>{vehicle.vehicleName}</div>
                     <div style={{fontSize:'20px'}}>Register Number: {vehicle.registerNum}</div>
                     <div style={{fontSize:'20px'}}> Model: {vehicle.vehicleModel}</div>
                     <div style={{fontSize:'20px'}}>Register Date: {vehicle.registerDate}</div>
@@ -225,9 +214,16 @@ const VehicleDetails = () => {
                   </div>
                 ) : (
                   <div>
-                   <Button variant="contained" onClick={() => handleAddPolicyClick(vehicle.vehicleId)}>
-                    {hasPolicy ? 'View Policy' : 'Add Policy'}
-                  </Button>
+                    <Button 
+  variant="contained" 
+  onClick={() => handleAddPolicyClick(vehicle.vehicleId)}
+>
+  {vehicle.hasPolicy ? 'View Policy' : 'Policy'}
+</Button>
+
+                   
+
+
                     <br />
                   </div>
                 )}

@@ -28,7 +28,7 @@ function CustomerList() {
       <h1 className='text-center'>Customer List</h1>
 
         <MuiNavbar/>
-      <h1>Customer List</h1>
+     
 
       <div className="customer-container" style={{position:"absolute",marginLeft:"6vw"}}>
         {customers.map(customer => (
@@ -46,12 +46,6 @@ function CustomerList() {
               </a>
             </p>
           
-            <p><strong>Gender:</strong> {customer.gender}</p>
-            <p><strong>Phone:</strong> {customer.phone}</p>
-            <p><strong>Address:</strong> {customer.address}</p>
-            <p><strong>Aadhar Number:</strong>  <a href={`https://localhost:7300/api/Customers/ViewFile/${customer.aadharNum}`} target="_blank" rel="noopener noreferrer">
-                  View file
-                  </a></p>
 
           </div>
         ))}

@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from 'react';
 
 function ClaimDetails(props) {
-  const [claim, setClaim] = useState(null);
+  const [claim, setClaim] = useState(null); // Initialize claim as null
   const [loading, setLoading] = useState(true);
+  const PId = localStorage.getItem("policyid");
 
   useEffect(() => {
     async function fetchClaim() {
       try {
-        const response = await fetch(`https://localhost:7300/api/Claims/${props.claimId}`);
+        const response = await fetch(`https://localhost:7300/api/Claims/ByPolicyId/${PId}`);
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
         const data = await response.json();
-        setClaim(data);
+        setClaim(data[0]);
+        console.log(data[0]);
         setLoading(false);
       } catch (error) {
         console.error('Error fetching claim:', error);
@@ -21,13 +23,7 @@ function ClaimDetails(props) {
     }
 
     fetchClaim();
-
-    // Cleanup function
-    return () => {
-      setClaim(null);
-      setLoading(true);
-    };
-  }, [props.claimId]);
+  }, [PId]);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -40,9 +36,6 @@ function ClaimDetails(props) {
   return (
     <div>
       <h2>Claim Details</h2>
-      <p>Claim ID: {claim.claimId}</p>
-      <p>Policy ID: {claim.policyId}</p>
-      <p>Customer ID: {claim.customerId}</p>
       <p>Claim Number: {claim.claimNumber}</p>
       <p>Claim Amount: {claim.claimAmount}</p>
       <p>Submission Date: {claim.submissionDate}</p>
@@ -51,7 +44,6 @@ function ClaimDetails(props) {
       <p>Description: {claim.description}</p>
       <p>Report Number: {claim.reportNum}</p>
       <p>Claim Status: {claim.claimStatus ? 'Active' : 'Inactive'}</p>
-    
     </div>
   );
 }

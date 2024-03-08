@@ -50,15 +50,15 @@ const VehicleSignUpForm = () => {
         return;
       }
   
-      // If registerNum exists and regNum is true, don't send the registerNum to the API
-      if (registerNumError && regNum) {
-        setFormData(prevState => ({
-          ...prevState,
-          registerNum: '' // Clear the registerNum value
-        }));
-      }
+     
+      // if (registerNumError && regNum) {
+      //   setFormData(prevState => ({
+      //     ...prevState,
+      //     registerNum: '' 
+      //   }));
+      // }
   
-      // Create formDataToSend
+     
       const formDataToSend = new FormData();
       formDataToSend.append('vehicleId', formData.vehicleId);
       formDataToSend.append('customerId', formData.CustomerId);
@@ -72,7 +72,7 @@ const VehicleSignUpForm = () => {
   
       console.log('FormData:', formDataToSend);
   
-      // Send data to API
+
       const response = await axios.post('https://localhost:7300/api/Vehicles', formDataToSend);
       console.log(response.data);
     
@@ -93,8 +93,9 @@ const VehicleSignUpForm = () => {
   };
 
   return (
-    <div>
-    
+    <Grid container justifyContent="center" alignItems="center" style={{ height: '100vh' }}>
+   
+  <MuiNavbar/>
     {error && <div className="error">{error}</div>}
       <form onSubmit={handleSubmit}>
         <TextField
@@ -153,6 +154,9 @@ const VehicleSignUpForm = () => {
           InputLabelProps={{
             shrink: true,
           }}
+          inputProps={{
+            max: new Date().toISOString().split("T")[0] // Set the maximum date to today
+          }}
           required
         />
         <TextField
@@ -166,6 +170,9 @@ const VehicleSignUpForm = () => {
           InputLabelProps={{
             shrink: true,
           }}
+          inputProps={{
+            max: new Date().toISOString().split("T")[0] // Set the maximum date to today
+          }}
           required
         />
         <label>
@@ -177,7 +184,7 @@ const VehicleSignUpForm = () => {
           Next
         </Button>
       </form>
-    </div>
+    </Grid>
   );
 };
 

@@ -21,7 +21,9 @@ const PolicyDetails = () => {
         if (response.ok) {
           const data = await response.json();
           if (data.length > 0) {
-            setPolicy(data[0]); // Assuming only one policy is returned
+            setPolicy(data[0]); 
+            console.log(data[0].policyId);
+            localStorage.setItem("policyid",data[0].policyId);// Assuming only one policy is returned
           } else {
             setError('No policy found for the specified vehicle ID');
           }
