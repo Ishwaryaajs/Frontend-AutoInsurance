@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom'; 
+import { useNavigate,useParams } from 'react-router-dom'; 
+
 import MuiNavbar from './MuiNavbar';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';

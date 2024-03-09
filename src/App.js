@@ -20,6 +20,7 @@ import VehicleDetails from './VehicleDetails';
 import PolicyDetails from './PolicyDetails';
 import ClaimForm from './ClaimForm';
 import CustomerList from './CustomerList';
+import VehicleDetailsCustomer from './VehicleDetailsCustomer';
 
 function App() {
   return <BrowserRouter>
@@ -32,6 +33,8 @@ function App() {
     <Route path='/updatecustomer' element={<UpdateCustomer/>}/>
     <Route path='/vehicle' element={<VehicleSignUpForm/>}/>
     <Route path='/vehicledetails' element={<VehicleDetails/>}/>
+    
+
     <Route path='/policydetails' element={<PolicyDetails/>}/>
     <Route path='/claimform' element={<ClaimForm/>}/>
     <Route path='/claimdetails' element={<ClaimDetails/>}/>
@@ -41,6 +44,7 @@ function App() {
     <Route path='/landingpage' element={<LandingPage/>}/>
   <Route path='/' element={<Navbar/>}/>
   <Route index element={<HomePage/>}/>
+  <Route path='/VehicleDetailsCustomer/:customerId' element={<VehicleDetailsCustomer/>}/>
    
     
 
