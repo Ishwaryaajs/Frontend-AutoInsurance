@@ -35,8 +35,8 @@ function PolicyDetailsByVehicleId({ vehicleId }) {
   }
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center',width:"50%",position:"absolute" }}>
-      <div>
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+      <div style={{ width: '50%', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
         {policies.length === 0 ? (
           <p>No policies found for the specified vehicle ID.</p>
         ) : (
