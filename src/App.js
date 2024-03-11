@@ -21,6 +21,7 @@ import PolicyDetails from './PolicyDetails';
 import ClaimForm from './ClaimForm';
 import CustomerList from './CustomerList';
 import VehicleDetailsCustomer from './VehicleDetailsCustomer';
+import PolicyDetailsByVehicleId from './PolicyDetailsByVehicleId';
 
 function App() {
   return <BrowserRouter>
@@ -45,6 +46,7 @@ function App() {
   <Route path='/' element={<Navbar/>}/>
   <Route index element={<HomePage/>}/>
   <Route path='/VehicleDetailsCustomer/:customerId' element={<VehicleDetailsCustomer/>}/>
+  <Route path='/policydetailsvehicle/:vehicleId' element={<PolicyDetailsByVehicleId/>}/>
    
     
 

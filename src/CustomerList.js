@@ -27,7 +27,7 @@ function CustomerList() {
     console.log(`Clicked Vehicle button for customer ${customerId}`);
     localStorage.setItem('customerId', customerId);
     // Navigate to the VehicleDetailsCustomer page with the customer ID as a parameter
-    navigate(`/VehicleDetailsCustomer/${customerId}`);
+    navigate(`/stepper`);
   };
 
   return (

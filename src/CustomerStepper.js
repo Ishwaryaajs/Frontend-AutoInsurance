@@ -43,7 +43,7 @@ function CustomerStepper() {
           <PolicyDetails vehicleId={selectedVehicleId} />
         )}
       </div>
-      <div style={{ alignSelf: 'flex-end' }}>
+      <div style={{ alignSelf: 'flex-end', marginLeft: '10px' }}>
         {activeStep !== steps.length && (
           <Button
             variant="contained"

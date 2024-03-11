@@ -1,5 +1,3 @@
-// VehicleDetailsCustomer.js
-
 import React, { useState, useEffect } from 'react';
 import MuiNavbar from './MuiNavbar';
 
@@ -25,20 +23,22 @@ function VehicleDetailsCustomer({ customerId }) {
   }, [Cid]);
 
   return (
-    <div>
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '10px' }}>
       <MuiNavbar/>
-      <div className="customer-container" style={{ position: "absolute", marginLeft: "6vw" }}>
+      <div className="customer-container" style={{ maxWidth: '800px', display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
         {vehicles.length === 0 ? (
           <p>No vehicles available for this customer.</p>
         ) : (
           vehicles.map(vehicle => (
-            <div key={vehicle.vehicleId}>
-              <p><strong>Vehicle Name:</strong> {vehicle.vehicleName}</p>
-              <p><strong>Register Number:</strong> {vehicle.registerNum}</p>
-              <p><strong>Vehicle Model:</strong> {vehicle.vehicleModel}</p>
-              <p><strong>Register Date:</strong> {vehicle.registerDate}</p>
-              <p><strong>Manufacturing Year:</strong> {vehicle.mfgYear}</p>
-              <p><strong>Vehicle Document:</strong> <a href={`https://localhost:7300/api/Vehicles/ViewFile/${vehicle.vehicleDoc}`} target="_blank" rel="noopener noreferrer">View file</a></p>
+            <div key={vehicle.vehicleId} style={{ margin: '10px' }}>
+              <div className="vehicle-card" style={{ border: '1px solid #ccc', borderRadius: '5px', padding: '20px', width: '300px' }}>
+                <p><strong>{vehicle.vehicleName}</strong> </p>
+                <p><strong>Register Number:</strong> {vehicle.registerNum}</p>
+                <p><strong> Model:</strong> {vehicle.vehicleModel}</p>
+                <p><strong>Register Date:</strong> {vehicle.registerDate}</p>
+                <p><strong>Manufacturing Year:</strong> {vehicle.mfgYear}</p>
+                <p><strong> Document:</strong> <a href={`https://localhost:7300/api/Vehicles/ViewFile/${vehicle.vehicleDoc}`} target="_blank" rel="noopener noreferrer">View file</a></p>
+              </div>
             </div>
           ))
         )}
