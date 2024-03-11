@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import VehicleDetailsCustomer from './VehicleDetailsCustomer';
-import PolicyDetails from './PolicyDetails'; // assuming PolicyDetails is your component for policy details
+import PolicyDetailsByVehicleId from './PolicyDetailsByVehicleId'; // PolicyDetailsByVehicleId component for displaying policy details
 import { useNavigate } from 'react-router-dom';
 import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
@@ -16,12 +16,23 @@ function CustomerStepper() {
   const steps = ['Vehicle Details', 'Policy Details'];
 
   const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    if (activeStep === 0) {
+      setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    } else {
+      // Navigate to the policy details page for the selected vehicle ID
+      navigate(`/policy-details/${selectedVehicleIds[0]}`);
+    }
   };
 
   const handleVehicleSelect = (vehicleId) => {
-    setSelectedVehicleIds((prevSelectedVehicleIds) => [...prevSelectedVehicleIds, vehicleId]);
+    setSelectedVehicleIds([vehicleId]); // Overwrite selected vehicles with the latest selection
   };
+
+  useEffect(() => {
+    if (selectedVehicleIds.length > 0) {
+      localStorage.setItem('selectedVehicleId', selectedVehicleIds[0]); // Store selected vehicle ID in localStorage
+    }
+  }, [selectedVehicleIds]);
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -37,15 +48,11 @@ function CustomerStepper() {
       <div>
         {activeStep === 0 && (
           <VehicleDetailsCustomer
-            onNext={handleNext}
             onVehicleSelect={handleVehicleSelect}
-            selectedVehicleIds={selectedVehicleIds} // Pass selected vehicle IDs
           />
         )}
         {activeStep === 1 && (
-          selectedVehicleIds.map((vehicleId, index) => (
-            <PolicyDetails key={index} vehicleId={vehicleId} />
-          ))
+          <PolicyDetailsByVehicleId vehicleId={selectedVehicleIds[0]} />
         )}
       </div>
       <div style={{ alignSelf: 'flex-end', marginLeft: '10px' }}>
