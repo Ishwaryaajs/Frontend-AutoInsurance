@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import VehicleDetailsCustomer from './VehicleDetailsCustomer';
 import PolicyDetails from './PolicyDetails'; // assuming PolicyDetails is your component for policy details
 import { useNavigate } from 'react-router-dom';
@@ -10,18 +10,17 @@ import Typography from '@mui/material/Typography';
 
 function CustomerStepper() {
   const [activeStep, setActiveStep] = useState(0);
-  const [selectedVehicleId, setSelectedVehicleId] = useState(null);
+  const [selectedVehicleIds, setSelectedVehicleIds] = useState([]);
   const navigate = useNavigate();
 
   const steps = ['Vehicle Details', 'Policy Details'];
 
-  const handleNext = (vehicleId) => {
-    if (activeStep === 0) {
-      setSelectedVehicleId(vehicleId);
-    } else {
-      navigate(`/PolicyDetails/${selectedVehicleId}`);
-    }
+  const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  };
+
+  const handleVehicleSelect = (vehicleId) => {
+    setSelectedVehicleIds((prevSelectedVehicleIds) => [...prevSelectedVehicleIds, vehicleId]);
   };
 
   return (
@@ -37,10 +36,16 @@ function CustomerStepper() {
       </div>
       <div>
         {activeStep === 0 && (
-          <VehicleDetailsCustomer onNext={handleNext} />
+          <VehicleDetailsCustomer
+            onNext={handleNext}
+            onVehicleSelect={handleVehicleSelect}
+            selectedVehicleIds={selectedVehicleIds} // Pass selected vehicle IDs
+          />
         )}
         {activeStep === 1 && (
-          <PolicyDetails vehicleId={selectedVehicleId} />
+          selectedVehicleIds.map((vehicleId, index) => (
+            <PolicyDetails key={index} vehicleId={vehicleId} />
+          ))
         )}
       </div>
       <div style={{ alignSelf: 'flex-end', marginLeft: '10px' }}>
@@ -48,7 +53,8 @@ function CustomerStepper() {
           <Button
             variant="contained"
             color="primary"
-            onClick={() => handleNext()}
+            onClick={handleNext}
+            disabled={selectedVehicleIds.length === 0}
           >
             {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
           </Button>

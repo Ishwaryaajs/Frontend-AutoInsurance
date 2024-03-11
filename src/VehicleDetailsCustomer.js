@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import MuiNavbar from './MuiNavbar';
 
-function VehicleDetailsCustomer({ customerId }) {
+function VehicleDetailsCustomer({ onNext, onVehicleSelect }) {
   const [vehicles, setVehicles] = useState([]);
+  const [selectedVehicleId, setSelectedVehicleId] = useState(null);
+  const [isNextEnabled, setIsNextEnabled] = useState(false);
   const Cid = localStorage.getItem("customerId");
 
   useEffect(() => {
@@ -22,16 +24,28 @@ function VehicleDetailsCustomer({ customerId }) {
     fetchVehicles();
   }, [Cid]);
 
+  const handleVehicleClick = (vehicleId) => {
+    setSelectedVehicleId(vehicleId);
+    localStorage.setItem('selectedVehicleId', vehicleId); // Store selected vehicle ID in localStorage
+    onVehicleSelect(vehicleId); // Notify parent component about vehicle selection
+    setIsNextEnabled(true); // Enable the next button
+  };
+
+  const handleNextClick = () => {
+    onNext(selectedVehicleId); // Pass selected vehicle ID to the parent component
+  };
+
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '10px' }}>
-      <MuiNavbar/>
-      <div className="customer-container" style={{ maxWidth: '800px', display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+    
+      <div className="customer-container" style={{ maxWidth: '600px' }}>
         {vehicles.length === 0 ? (
           <p>No vehicles available for this customer.</p>
         ) : (
           vehicles.map(vehicle => (
-            <div key={vehicle.vehicleId} style={{ margin: '10px' }}>
-              <div className="vehicle-card" style={{ border: '1px solid #ccc', borderRadius: '5px', padding: '20px', width: '300px' }}>
+            <div key={vehicle.vehicleId} style={{ marginBottom: '20px' }}>
+              <div className="vehicle-card" style={{ border: '1px solid #ccc', borderRadius: '5px', padding: '20px', cursor: 'pointer', position: 'relative' }} onClick={() => handleVehicleClick(vehicle.vehicleId)}>
+                {selectedVehicleId === vehicle.vehicleId && <div style={{ position: 'absolute', top: '-10px', left: '10px', width: '20px', height: '20px', borderRadius: '50%', backgroundColor: 'green' }}></div>}
                 <p><strong>{vehicle.vehicleName}</strong> </p>
                 <p><strong>Register Number:</strong> {vehicle.registerNum}</p>
                 <p><strong> Model:</strong> {vehicle.vehicleModel}</p>
@@ -42,6 +56,9 @@ function VehicleDetailsCustomer({ customerId }) {
             </div>
           ))
         )}
+        <div style={{ alignSelf: 'flex-end', marginTop: '20px' }}>
+          <button disabled={!isNextEnabled} onClick={handleNextClick}>Next</button>
+        </div>
       </div>
     </div>
   );

@@ -70,7 +70,7 @@ import { RiMotorbikeFill } from "react-icons/ri";
             <MDBCard className='bg-white my-5 mx-auto' style={{borderRadius: '1rem', maxWidth: '500px', backgroundImage: `url('https://www.cloud4c.com/sites/default/files/2023-12/Insurance-in-a-box-banner.webp')`}}>
               <MDBCardBody className='p-5 w-100 d-flex flex-column'>
   
-                <h2 className="fw-bold mb-2 text-center" style={{color:"white"}}><RiMotorbikeFill />ClaimPro</h2>
+                <h2 className="fw-bold mb-2 text-center" style={{color:"white"}}>ClaimPro<RiMotorbikeFill /></h2>
                 {loginError && <marquee style={{ color: 'red' }}>{loginError}</marquee>}
            
                 <p className="text-white-50 mb-3" style={{color:"white"}}>Please enter your login and password!</p>

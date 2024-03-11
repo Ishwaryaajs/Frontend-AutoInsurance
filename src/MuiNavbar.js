@@ -21,7 +21,8 @@ import HomeIcon from '@mui/icons-material/Home';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import DriveEtaIcon from '@mui/icons-material/DriveEta';
-import { Link } from 'react-router-dom'; // Import Link from react-router-dom
+import { Link } from 'react-router-dom'; 
+import { RiMotorbikeFill } from "react-icons/ri";
 
 const drawerWidth = 240;
 
@@ -123,7 +124,7 @@ export default function MuiNavbar() {
               <MenuIcon />
             </IconButton>
             <Typography variant="h6" noWrap component="div">
-              ClaimPro
+              ClaimPro <RiMotorbikeFill />
             </Typography>
           </Toolbar>
         </AppBar>
@@ -138,9 +139,6 @@ export default function MuiNavbar() {
             {[
               { text: 'Home', icon: <HomeIcon />, path: '/landingpage' },
               { text: 'View Profile', icon: <AccountCircleIcon />, path: '/customers' },
-            
-
-              { text: 'Vehicle Details', icon: <DriveEtaIcon />, path: '/vehicledetails' },
 
               { text: 'Sign out', icon: <ExitToAppIcon />, path: '/login' },
             ].map((item, index) => (
