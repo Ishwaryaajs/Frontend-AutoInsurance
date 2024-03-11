@@ -25,6 +25,7 @@ function CustomerList() {
 
   const handleVehicleClick = (customerId) => {
     console.log(`Clicked Vehicle button for customer ${customerId}`);
+    localStorage.setItem('customerId', customerId);
     // Navigate to the VehicleDetailsCustomer page with the customer ID as a parameter
     navigate(`/VehicleDetailsCustomer/${customerId}`);
   };
@@ -46,7 +47,7 @@ function CustomerList() {
                 View file
               </a>
             </p>
-            <button onClick={() => handleVehicleClick(customer.customerId)}>Vehicle</button>
+            <button className="btn btn-primary" onClick={() => handleVehicleClick(customer.customerId)}>Vehicle</button>
           </div>
         ))}
       </div>

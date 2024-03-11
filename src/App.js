@@ -13,7 +13,7 @@ import MuiNavbar from './MuiNavbar';
 import CustomerDetails from './CustomerDetails';
 import VehicleSignUpForm from './VehcileSignUp';
 import InsurancePolicySignUpForm from './InsurancePolicySignUpForm';
-import StepperPage from './StepperPage';
+import CustomerStepper from './CustomerStepper';
 import LandingPage from './LandingPage';
 import UpdateCustomer from './UpdateCustomer';
 import VehicleDetails from './VehicleDetails';
@@ -39,7 +39,7 @@ function App() {
     <Route path='/claimform' element={<ClaimForm/>}/>
     <Route path='/claimdetails' element={<ClaimDetails/>}/>
     <Route path='/policy' element={<InsurancePolicySignUpForm/>}/>
-    <Route path='/stepper' element={<StepperPage/>}/>
+    <Route path='/stepper' element={<CustomerStepper/>}/>
     <Route path='/customers' element={<CustomerList/>}/>
     <Route path='/landingpage' element={<LandingPage/>}/>
   <Route path='/' element={<Navbar/>}/>
