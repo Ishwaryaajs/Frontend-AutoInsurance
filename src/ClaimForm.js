@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import Typography from '@mui/material/Typography';
-import { Grid, TextField, Button } from '@mui/material';
+import { Card, CardContent, Grid, TextField, Button } from '@mui/material';
 import MuiNavbar from './MuiNavbar';
 
 const ClaimForm = () => {
@@ -26,10 +23,16 @@ const ClaimForm = () => {
     reportNum: generatedReportNum,
     claimStatus: false
   });
+  
+  const [file, setFile] = useState(null); // State to hold the selected file
   const navigate = useNavigate();
 
   const handleChange = (e) => {
     setClaim({ ...claim, [e.target.name]: e.target.value });
+  };
+
+  const handleFileChange = (e) => {
+    setFile(e.target.files[0]); // Update file state with the selected file
   };
 
   const handleSubmit = async (e) => {
@@ -44,21 +47,36 @@ const ClaimForm = () => {
     };
 
     try {
-      const response = await axios.post(`https://localhost:7300/api/Claims`, newClaim);
+      const formData = new FormData();
+      formData.append('file', file); // Append the file to FormData
+
+      // Append other claim data to FormData
+      Object.entries(newClaim).forEach(([key, value]) => {
+        formData.append(key, value);
+      });
+
+      const response = await axios.post(`https://localhost:7300/api/Claims`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
       console.log('Claim submitted successfully:', response.data);
       navigate('/landingpage');
 
+      // Reset form fields and file state after successful submission
       setClaim({
-        ...claim,
+        policyId: localStorage.getItem("policyId"),
+        customerId: sessionStorage.getItem("Id"),
         claimNumber: generatedClaimNumber.toString(),
-        reportNum: generatedReportNum,
-        submissionDate: formattedSubmissionDate,
-        accidentDate: '',
         claimAmount: '',
+        submissionDate: '',
+        accidentDate: '',
         accidentLocation: '',
         description: '',
+        reportNum: generatedReportNum,
         claimStatus: false
       });
+      setFile(null);
     } catch (error) {
       console.error('Error submitting claim:', error);
     }
@@ -70,7 +88,6 @@ const ClaimForm = () => {
       <Grid item xs={12} sm={8} md={6} lg={4}>
         <Card style={{ textAlign: 'center', padding: '20px', backgroundColor: 'rgba(255, 255, 255, 0.8)' }}>
           <CardContent>
-           
             <form onSubmit={handleSubmit}>
               <TextField
                 label="Claim Number"
@@ -135,6 +152,12 @@ const ClaimForm = () => {
                 InputProps={{ readOnly: true }}
                 style={{ marginBottom: '20px' }}
               />
+              <input
+                type="file"
+                accept=".pdf" // Allow only PDF files
+                onChange={handleFileChange}
+                style={{ marginBottom: '20px' }}
+              />
               <Button type="submit" variant="contained" color="primary">
                 Submit Claim
               </Button>
@@ -145,4 +168,5 @@ const ClaimForm = () => {
     </Grid>
   );
 };
+
 export default ClaimForm;
