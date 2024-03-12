@@ -22,6 +22,7 @@ import ClaimForm from './ClaimForm';
 import CustomerList from './CustomerList';
 import VehicleDetailsCustomer from './VehicleDetailsCustomer';
 import PolicyDetailsByVehicleId from './PolicyDetailsByVehicleId';
+import ClaimDetailsByPolicyId from './ClaimDetailsByPolicyId';
 
 function App() {
   return <BrowserRouter>
@@ -34,8 +35,6 @@ function App() {
     <Route path='/updatecustomer' element={<UpdateCustomer/>}/>
     <Route path='/vehicle' element={<VehicleSignUpForm/>}/>
     <Route path='/vehicledetails' element={<VehicleDetails/>}/>
-    
-
     <Route path='/policydetails' element={<PolicyDetails/>}/>
     <Route path='/claimform' element={<ClaimForm/>}/>
     <Route path='/claimdetails' element={<ClaimDetails/>}/>
@@ -47,6 +46,7 @@ function App() {
   <Route index element={<HomePage/>}/>
   <Route path='/VehicleDetailsCustomer/:customerId' element={<VehicleDetailsCustomer/>}/>
   <Route path='/policydetailsvehicle/:vehicleId' element={<PolicyDetailsByVehicleId/>}/>
+  <Route path='/claimdetailsbypolicy/:policyId' element={<ClaimDetailsByPolicyId/>}/>
    
     
 

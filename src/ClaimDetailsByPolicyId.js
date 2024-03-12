@@ -5,17 +5,17 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 
-function PolicyDetailsByVehicleId({ vehicleId, onPolicySelect }) {
-  const [policies, setPolicies] = useState([]);
+function ClaimDetailsByPolicyId({ policyId }) {
+  const [claims, setClaims] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [selectedPolicyId, setSelectedPolicyId] = useState(null); // State to hold the selected policy ID
-
+const pcid = localStorage.getItem("policyId");
   useEffect(() => {
-    const fetchPolicies = async () => {
+    const fetchClaims = async () => {
       try {
-        const response = await axios.get(`https://localhost:7300/api/InsurancePolicies/ByVehicleId/${vehicleId}`);
-        setPolicies(response.data);
+        const response = await axios.get(`https://localhost:7300/api/Claims/ByPolicyId/${pcid}`);
+        setClaims(response.data);
+        console.log(response.data);
         setLoading(false);
       } catch (error) {
         setError(error.message);
@@ -23,14 +23,8 @@ function PolicyDetailsByVehicleId({ vehicleId, onPolicySelect }) {
       }
     };
 
-    fetchPolicies();
-  }, [vehicleId]);
-
-  const handlePolicyClick = (policyId) => {
-    setSelectedPolicyId(policyId); // Set the selected policy ID
-    onPolicySelect(policyId);
-    localStorage.setItem("policyId",policyId); // Notify parent component about policy selection
-  };
+    fetchClaims();
+  }, [pcid]);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -43,28 +37,28 @@ function PolicyDetailsByVehicleId({ vehicleId, onPolicySelect }) {
   return (
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
       <div style={{ width: '50%', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
-        {policies.length === 0 ? (
-          <p>No policies found for the specified vehicle ID.</p>
+        {claims.length === 0 ? (
+          <p>No claims found for the specified policy ID.</p>
         ) : (
           <Grid container spacing={2}>
-            {policies.map(policy => (
-              <Grid item key={policy.policyId} xs={12} sm={6} md={4} lg={3}>
-                <Card onClick={() => handlePolicyClick(policy.policyId)} style={{ cursor: 'pointer' }}>
+            {claims.map(claim => (
+              <Grid item key={claim.claimId} xs={12} sm={6} md={4} lg={3}>
+                <Card>
                   <CardContent>
                     <Typography color="textSecondary">
-                      {policy.policyNum}
+                      Claim ID: {claim.claimId}
                     </Typography>
                     <Typography color="textSecondary">
-                      Start Date: {policy.startDate}
+                      Claim Amount: {claim.claimAmount}
                     </Typography>
                     <Typography color="textSecondary">
-                      End Date: {policy.endDate}
+                      Claim Date: {claim.submissionDate}
                     </Typography>
                     <Typography color="textSecondary">
-                      Coverage Type: {policy.coverageType}
+                      Description: {claim.description}
                     </Typography>
                     <Typography color="textSecondary">
-                      Policy Amount: {policy.policyAmount}
+                      Status: {claim.status}
                     </Typography>
                   </CardContent>
                 </Card>
@@ -77,4 +71,4 @@ function PolicyDetailsByVehicleId({ vehicleId, onPolicySelect }) {
   );
 }
 
-export default PolicyDetailsByVehicleId;
+export default ClaimDetailsByPolicyId;
