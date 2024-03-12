@@ -99,7 +99,7 @@ const ClaimForm = () => {
                 InputProps={{ readOnly: true }}
                 style={{ marginBottom: '20px' }}
               />
-              <TextField
+             <TextField
                 label="Accident Date"
                 type="date"
                 name="accidentDate"
@@ -108,6 +108,7 @@ const ClaimForm = () => {
                 variant="outlined"
                 fullWidth
                 required
+                InputLabelProps={{ shrink: true }} // Keep the label from collapsing
                 style={{ marginBottom: '20px' }}
               />
               <TextField
@@ -158,6 +159,7 @@ const ClaimForm = () => {
                 onChange={handleFileChange}
                 style={{ marginBottom: '20px' }}
               />
+              <br/>
               <Button type="submit" variant="contained" color="primary">
                 Submit Claim
               </Button>
