@@ -55,10 +55,19 @@ const pcid = localStorage.getItem("policyId");
                       Claim Date: {claim.submissionDate}
                     </Typography>
                     <Typography color="textSecondary">
+                      Report Number: {claim.reportNum}
+                    </Typography>
+                    <Typography color="textSecondary">
+                     Accident date: {claim.accidentDate}
+                    </Typography>
+                    <Typography color="textSecondary">
+                    Accident Location : {claim.accidentLocation}
+                    </Typography>
+                    <Typography color="textSecondary">
                       Description: {claim.description}
                     </Typography>
                     <Typography color="textSecondary">
-                      Status: {claim.status}
+                      Status: Pending
                     </Typography>
                   </CardContent>
                 </Card>

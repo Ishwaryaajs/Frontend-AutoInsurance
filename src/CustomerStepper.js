@@ -23,19 +23,22 @@ function CustomerStepper() {
   };
   const handleNext = () => {
     if (activeStep === 0) {
-      setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    // }  if (activeStep === 1) {
-    //   // Navigate to the policy details page for the selected vehicle ID
-    //   navigate(`/policydetailsvehicle/${selectedVehicleIds[0]}`);
-    }  if (activeStep === 1) {
-      navigate(`/claimdetailsbypolicy/${selectedPolicyId}`);
-      // if (selectedPolicyId) {
-      //   navigate(`/claimdetailsbypolicy/${selectedPolicyId}`);
-      // } else {
-      //   console.error("No policy ID selected.");
-      // }
+      // Move to the next step only if a vehicle is selected
+      if (selectedVehicleIds.length > 0) {
+        setActiveStep((prevActiveStep) => prevActiveStep + 1);
+      } else {
+        console.error("No vehicle selected.");
+      }
+    } else if (activeStep === 1) {
+      // Move to the next step only if a policy is selected
+      if (selectedPolicyId) {
+        setActiveStep((prevActiveStep) => prevActiveStep + 1);
+      } else {
+        console.error("No policy ID selected.");
+      }
     }
   };
+  
 
   const handleVehicleSelect = (vehicleId) => {
     setSelectedVehicleIds([vehicleId]); // Overwrite selected vehicles with the latest selection
