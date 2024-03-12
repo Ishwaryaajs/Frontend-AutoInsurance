@@ -9,7 +9,7 @@ function PolicyDetailsByVehicleId({ vehicleId, onPolicySelect }) {
   const [policies, setPolicies] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [selectedPolicyId, setSelectedPolicyId] = useState(null); // State to hold the selected policy ID
+  const [selectedPolicyId, setSelectedPolicyId] = useState(null); 
 
   useEffect(() => {
     const fetchPolicies = async () => {

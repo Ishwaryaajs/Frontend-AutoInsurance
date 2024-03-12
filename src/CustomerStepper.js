@@ -39,6 +39,7 @@ function CustomerStepper() {
     }
   };
   
+  
 
   const handleVehicleSelect = (vehicleId) => {
     setSelectedVehicleIds([vehicleId]); // Overwrite selected vehicles with the latest selection
