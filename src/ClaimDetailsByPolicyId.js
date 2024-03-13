@@ -16,6 +16,8 @@ const pcid = localStorage.getItem("policyId");
         const response = await axios.get(`https://localhost:7300/api/Claims/ByPolicyId/${pcid}`);
         setClaims(response.data);
         console.log(response.data);
+        console.log(response.data[0].claimId);
+      localStorage.setItem("pId",response.data[0].claimId)
         setLoading(false);
       } catch (error) {
         setError(error.message);
@@ -35,7 +37,8 @@ const pcid = localStorage.getItem("policyId");
   }
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+   
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
       <div style={{ width: '50%', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
         {claims.length === 0 ? (
           <p>No claims found for the specified policy ID.</p>
@@ -67,8 +70,11 @@ const pcid = localStorage.getItem("policyId");
                       Description: {claim.description}
                     </Typography>
                     <Typography color="textSecondary">
-                      Status: Pending
+                     Bill:<a href={`https://localhost:7300/api/Claims/ViewFile/${claim.uploadbill}`} target="_blank" rel="noopener noreferrer">View file</a>
                     </Typography>
+                    <Typography color="textSecondary">
+  Status: {claim.claimStatus ? 'Approved' : 'Pending'} {/* Assuming claimStatus is a boolean */}
+</Typography>
                   </CardContent>
                 </Card>
               </Grid>
@@ -77,6 +83,8 @@ const pcid = localStorage.getItem("policyId");
         )}
       </div>
     </div>
+ 
+   
   );
 }
 
